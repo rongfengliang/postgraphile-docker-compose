@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+    - "5432:5432"
+    environment:
+    - "POSTGRES_PASSWORD:dalong"
+  service:
+    image: node:9
+    init: true
+    command: npx postgraphile -w  -n 0.0.0.0 -c postgres://postgres:dalong@postgres:5432/postgres --schema public
+    ports:
+    - "5000:5000"
